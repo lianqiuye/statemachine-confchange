@@ -52,6 +52,9 @@ type StateMachine interface {
 
 	// Restore is used to restore state machine from a snapshot.
 	Restore(io.ReadCloser) error
+
+	// Apply a config change
+	ApplyConfChange(raftpb.Member, etcdraftpb.ConfChangeType)
 }
 
 // Mux represents a multi node state that is participating in multiple consensus groups,

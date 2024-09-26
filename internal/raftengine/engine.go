@@ -601,6 +601,7 @@ func (eng *engine) publishConfChange(ent etcdraftpb.Entry) {
 	}
 
 	eng.confState = eng.node.ApplyConfChange(cc)
+	eng.fsm.ApplyConfChange(*mem, cc.Type)
 }
 
 // process the incoming messages from the given chan.
