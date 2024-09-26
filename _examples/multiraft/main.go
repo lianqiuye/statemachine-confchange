@@ -24,6 +24,8 @@ import (
 	"github.com/shaj13/raft/transport"
 	"github.com/shaj13/raft/transport/raftgrpc"
 	"google.golang.org/grpc"
+
+	etcdraftpb "go.etcd.io/etcd/raft/v3/raftpb"
 )
 
 var (
@@ -310,6 +312,9 @@ func (s *stateMachine) Apply(data []byte) {
 
 		raftgroups.createAndStart(c.GroupID, addr)
 	}
+}
+
+func (s *stateMachine) ApplyConfChange(mem raft.Member, tp etcdraftpb.ConfChangeType) {
 }
 
 func (s *stateMachine) Snapshot() (io.ReadCloser, error) {
